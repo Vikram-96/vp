@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -108,11 +109,12 @@
     }
 
     .hero-name {
-      font-size: clamp(2.8rem, 6vw, 4.8rem);
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
       font-weight: 700;
       line-height: 1.05;
       letter-spacing: -0.02em;
       margin-bottom: 0.5rem;
+      white-space: nowrap;
     }
     .hero-name span { color: var(--cyan); }
 
@@ -368,12 +370,49 @@
     .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
     .skill-tag {
       font-size: 0.78rem;
-      padding: 4px 10px;
+      padding: 5px 10px;
       background: var(--bg3);
       border: 1px solid var(--border);
       border-radius: 3px;
       color: var(--text);
       font-family: var(--mono);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .skill-tag i, .skill-tag .si {
+      font-size: 1rem;
+      line-height: 1;
+    }
+    /* Brand colours for devicon */
+    .skill-tag .di-azure    { color: #0078D4; }
+    .skill-tag .di-k8s      { color: #326CE5; }
+    .skill-tag .di-tf       { color: #7B42BC; }
+    .skill-tag .di-docker   { color: #2496ED; }
+    .skill-tag .di-linux    { color: #FCC624; }
+    .skill-tag .di-bash     { color: #4EAA25; }
+    .skill-tag .di-python   { color: #3776AB; }
+    .skill-tag .di-github   { color: #e6edf3; }
+    .skill-tag .di-grafana  { color: #F46800; }
+    .skill-tag .di-prom     { color: #E6522C; }
+    .skill-tag .di-helm     { color: #0F1689; }
+    .skill-tag .di-ansible  { color: #EE0000; }
+    .skill-tag .di-rancher  { color: #0075A8; }
+    .skill-tag .di-jira     { color: #0052CC; }
+    .skill-tag .di-conf     { color: #172B4D; }
+    .skill-tag .di-aws      { color: #FF9900; }
+    .skill-tag .di-ps       { color: #5391FE; }
+
+    /* AWS level badge */
+    .aws-level {
+      font-size: 0.6rem;
+      background: rgba(255,153,0,0.15);
+      color: #FF9900;
+      border: 1px solid rgba(255,153,0,0.3);
+      border-radius: 2px;
+      padding: 1px 5px;
+      font-family: var(--mono);
+      margin-left: 2px;
     }
 
     /* ── CERTS SECTION ── */
@@ -490,10 +529,10 @@
 
   <div class="hero-content">
     <div class="hero-eyebrow">Infrastructure & Platform Engineering</div>
-    <h1 class="hero-name">Vikram<br><span>Panda</span></h1>
+    <h1 class="hero-name">Vikram Panda</h1>
     <p class="hero-title">
       <strong>8 years</strong> designing cloud-native infrastructure ·
-      Azure · Kubernetes · Terraform · CI/CD
+      Azure Expert · AWS Intermediate · Kubernetes · Terraform · CI/CD
     </p>
 
     <div class="status-bar">
@@ -542,7 +581,7 @@
   <div class="about-grid">
     <div class="about-text fade-up">
       <p>I'm a Infrastructure & DevOps Engineer with <strong>8 years</strong> of hands-on experience designing, automating, and hardening scalable cloud infrastructure. Currently at <strong>Arcadis</strong> within the Intelligence segment, I lead platform engineering efforts across Azure, AKS, and Terraform at enterprise scale.</p>
-      <p>My work spans the full lifecycle — from writing Terraform modules and managing Kubernetes clusters to configuring CI/CD pipelines in GitHub Actions and Azure DevOps, and wiring up observability stacks with Prometheus & Grafana. I'm equally at home debugging a Helm chart at 11pm or presenting an architecture proposal to stakeholders.</p>
+      <p>My primary expertise is <strong>Microsoft Azure</strong> at an advanced level — AKS, Key Vault, ARM, Azure DevOps, and Monitor. I also bring solid <strong>AWS intermediate experience</strong> across EC2, S3, EKS, Lambda, IAM, and CloudFormation, giving me multi-cloud fluency that's increasingly valuable at enterprise scale.</p>
       <p>I'm currently working toward a Platform/Cloud Architect role, with AZ-305 next on the certifications roadmap.</p>
 
       <div class="certs-row">
@@ -618,63 +657,73 @@
 
   <div class="skills-grid">
     <div class="skill-group fade-up">
-      <div class="skill-group-title"><i class="fas fa-cloud"></i> Cloud Platform</div>
+      <div class="skill-group-title"><i class="fas fa-cloud"></i> Azure Cloud</div>
       <div class="skill-tags">
-        <span class="skill-tag">Microsoft Azure</span>
-        <span class="skill-tag">AKS</span>
-        <span class="skill-tag">Azure DevOps</span>
-        <span class="skill-tag">Azure Key Vault</span>
-        <span class="skill-tag">ARM Templates</span>
-        <span class="skill-tag">AWS</span>
+        <span class="skill-tag"><i class="devicon-azure-plain di-azure"></i> Microsoft Azure</span>
+        <span class="skill-tag"><i class="devicon-kubernetes-plain di-k8s"></i> AKS</span>
+        <span class="skill-tag"><i class="devicon-azure-plain di-azure"></i> Azure DevOps</span>
+        <span class="skill-tag"><i class="devicon-azure-plain di-azure"></i> Key Vault</span>
+        <span class="skill-tag"><i class="devicon-azure-plain di-azure"></i> ARM Templates</span>
+        <span class="skill-tag"><i class="devicon-azure-plain di-azure"></i> Azure Monitor</span>
+      </div>
+    </div>
+    <div class="skill-group fade-up">
+      <div class="skill-group-title"><i class="fab fa-aws" style="color:#FF9900"></i> AWS <span class="aws-level">Intermediate</span></div>
+      <div class="skill-tags">
+        <span class="skill-tag"><i class="devicon-amazonwebservices-plain-wordmark di-aws"></i> EC2 &amp; VPC</span>
+        <span class="skill-tag"><i class="devicon-amazonwebservices-plain-wordmark di-aws"></i> S3 &amp; IAM</span>
+        <span class="skill-tag"><i class="devicon-amazonwebservices-plain-wordmark di-aws"></i> EKS</span>
+        <span class="skill-tag"><i class="devicon-amazonwebservices-plain-wordmark di-aws"></i> CloudFormation</span>
+        <span class="skill-tag"><i class="devicon-amazonwebservices-plain-wordmark di-aws"></i> Lambda</span>
+        <span class="skill-tag"><i class="devicon-amazonwebservices-plain-wordmark di-aws"></i> CloudWatch</span>
       </div>
     </div>
     <div class="skill-group fade-up">
       <div class="skill-group-title"><i class="fas fa-code-branch"></i> Infrastructure as Code</div>
       <div class="skill-tags">
-        <span class="skill-tag">Terraform</span>
-        <span class="skill-tag">Terraspace</span>
-        <span class="skill-tag">Helm</span>
-        <span class="skill-tag">Ansible</span>
-        <span class="skill-tag">Bicep</span>
+        <span class="skill-tag"><i class="devicon-terraform-plain di-tf"></i> Terraform</span>
+        <span class="skill-tag"><svg class="si" width="14" height="14" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="4" fill="#7B42BC"/><text x="4" y="22" font-size="14" font-weight="bold" fill="white" font-family="monospace">TS</text></svg> Terraspace</span>
+        <span class="skill-tag"><svg class="si" width="14" height="14" viewBox="0 0 128 128"><path d="M64 0C28.7 0 0 28.7 0 64s28.7 64 64 64 64-28.7 64-64S99.3 0 64 0z" fill="#0F1689"/><path d="M38 88V40l26 24 26-24v48" stroke="white" stroke-width="8" fill="none" stroke-linejoin="round"/></svg> Helm</span>
+        <span class="skill-tag"><i class="devicon-ansible-plain di-ansible"></i> Ansible</span>
+        <span class="skill-tag"><i class="devicon-azure-plain di-azure"></i> Bicep</span>
       </div>
     </div>
     <div class="skill-group fade-up">
-      <div class="skill-group-title"><i class="fab fa-docker"></i> Containers & Orchestration</div>
+      <div class="skill-group-title"><i class="fab fa-docker" style="color:#2496ED"></i> Containers & Orchestration</div>
       <div class="skill-tags">
-        <span class="skill-tag">Kubernetes</span>
-        <span class="skill-tag">Docker</span>
-        <span class="skill-tag">Rancher</span>
-        <span class="skill-tag">Container Security</span>
-        <span class="skill-tag">Namespaces</span>
+        <span class="skill-tag"><i class="devicon-kubernetes-plain di-k8s"></i> Kubernetes</span>
+        <span class="skill-tag"><i class="devicon-docker-plain di-docker"></i> Docker</span>
+        <span class="skill-tag"><svg class="si" width="14" height="14" viewBox="0 0 32 32"><rect width="32" height="32" rx="3" fill="#0075A8"/><text x="4" y="22" font-size="12" font-weight="bold" fill="white" font-family="sans-serif">R</text></svg> Rancher</span>
+        <span class="skill-tag"><i class="fas fa-shield-alt" style="color:#00e5ff;font-size:0.85rem"></i> Container Security</span>
       </div>
     </div>
     <div class="skill-group fade-up">
       <div class="skill-group-title"><i class="fas fa-infinity"></i> CI/CD</div>
       <div class="skill-tags">
-        <span class="skill-tag">GitHub Actions</span>
-        <span class="skill-tag">Azure Pipelines</span>
-        <span class="skill-tag">OIDC / Federated ID</span>
-        <span class="skill-tag">Copilot CLI</span>
+        <span class="skill-tag"><i class="devicon-github-original di-github"></i> GitHub Actions</span>
+        <span class="skill-tag"><i class="devicon-azure-plain di-azure"></i> Azure Pipelines</span>
+        <span class="skill-tag"><i class="fas fa-key" style="color:#d29922;font-size:0.8rem"></i> OIDC / Federated ID</span>
+        <span class="skill-tag"><i class="devicon-github-original di-github"></i> Copilot CLI</span>
       </div>
     </div>
     <div class="skill-group fade-up">
       <div class="skill-group-title"><i class="fas fa-chart-line"></i> Observability</div>
       <div class="skill-tags">
-        <span class="skill-tag">Prometheus</span>
-        <span class="skill-tag">Grafana</span>
-        <span class="skill-tag">Azure Monitor</span>
-        <span class="skill-tag">Log Analytics</span>
+        <span class="skill-tag"><i class="devicon-prometheus-original di-prom"></i> Prometheus</span>
+        <span class="skill-tag"><i class="devicon-grafana-original di-grafana"></i> Grafana</span>
+        <span class="skill-tag"><i class="devicon-azure-plain di-azure"></i> Azure Monitor</span>
+        <span class="skill-tag"><i class="devicon-azure-plain di-azure"></i> Log Analytics</span>
       </div>
     </div>
     <div class="skill-group fade-up">
       <div class="skill-group-title"><i class="fas fa-terminal"></i> Scripting & Tooling</div>
       <div class="skill-tags">
-        <span class="skill-tag">Bash</span>
-        <span class="skill-tag">PowerShell</span>
-        <span class="skill-tag">Linux</span>
-        <span class="skill-tag">Python</span>
-        <span class="skill-tag">Jira</span>
-        <span class="skill-tag">Confluence</span>
+        <span class="skill-tag"><i class="devicon-bash-plain di-bash"></i> Bash</span>
+        <span class="skill-tag"><i class="devicon-powershell-plain di-ps"></i> PowerShell</span>
+        <span class="skill-tag"><i class="devicon-linux-plain di-linux"></i> Linux</span>
+        <span class="skill-tag"><i class="devicon-python-plain di-python"></i> Python</span>
+        <span class="skill-tag"><i class="devicon-jira-plain di-jira"></i> Jira</span>
+        <span class="skill-tag"><i class="devicon-confluence-original di-conf"></i> Confluence</span>
       </div>
     </div>
   </div>
