@@ -1,519 +1,403 @@
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vikram Panda — Infrastructure & Platform Engineer</title>
-  <meta name="description" content="Vikram Panda — Infrastructure & DevOps Engineer specialising in Azure, Kubernetes, Terraform, and CI/CD pipelines.">
-  <meta name="author" content="Vikram Panda">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vikram Panda — Infrastructure & DevOps Engineer</title>
+<meta name="description" content="Vikram Panda — Infrastructure & DevOps Engineer. 9+ years in Azure, Kubernetes, Terraform, Terragrunt, DevSecOps.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
+:root{
+  --void:     #080A0F;
+  --base:     #0E1117;
+  --surface:  #141920;
+  --raised:   #1A2233;
+  --border:   #1E2A3A;
+  --border2:  #263347;
+  --sky:      #38BDF8;
+  --sky-dim:  rgba(56,189,248,0.10);
+  --sky-glow: rgba(56,189,248,0.25);
+  --indigo:   #818CF8;
+  --ind-dim:  rgba(129,140,248,0.10);
+  --green:    #34D399;
+  --amber:    #FBBF24;
+  --text:     #E8F4FF;
+  --sub:      #94A3B8;
+  --faint:    #3E5068;
+  --display:  'Space Grotesk', sans-serif;
+  --body:     'Inter', sans-serif;
+  --mono:     'Fira Code', monospace;
+}
 
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--void);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
-    :root {
-      --bg:        #0d1117;
-      --bg2:       #161b22;
-      --bg3:       #1c2230;
-      --border:    #30363d;
-      --cyan:      #00e5ff;
-      --cyan-dim:  rgba(0,229,255,0.12);
-      --cyan-glow: rgba(0,229,255,0.35);
-      --green:     #3fb950;
-      --amber:     #d29922;
-      --text:      #e6edf3;
-      --muted:     #8b949e;
-      --mono:      'JetBrains Mono', monospace;
-      --sans:      'Inter', sans-serif;
-    }
+/* ─── SYSTEM BAR ─── */
+.sysbar{
+  background:var(--base);
+  border-bottom:1px solid var(--border);
+  padding:0 5%;
+  height:34px;
+  display:flex;
+  align-items:center;
+  gap:2.5rem;
+  font-family:var(--mono);
+  font-size:0.62rem;
+  color:var(--faint);
+  letter-spacing:0.06em;
+  position:fixed;top:0;left:0;right:0;z-index:200;
+}
+.sysbar-item{display:flex;align-items:center;gap:0.5rem}
+.sysbar-val{color:var(--sky)}
+.sysbar-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:sb-pulse 2.4s ease-in-out infinite}
+@keyframes sb-pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(52,211,153,0.4)}50%{opacity:0.6;box-shadow:0 0 0 4px rgba(52,211,153,0)}}
+.sysbar-right{margin-left:auto;color:var(--faint)}
 
-    html { scroll-behavior: smooth; }
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:34px;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;height:52px;
+  background:rgba(8,10,15,0.80);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:var(--display);font-size:1rem;font-weight:600;color:var(--text);letter-spacing:-0.01em}
+.nav-logo span{color:var(--sky)}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{font-family:var(--body);font-size:0.78rem;font-weight:400;color:var(--sub);text-decoration:none;letter-spacing:0.02em;transition:color 0.2s}
+.nav-links a:hover{color:var(--text)}
 
-    body {
-      font-family: var(--sans);
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+/* ─── HERO ─── */
+#hero{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 420px;
+  align-items:center;
+  gap:3rem;
+  padding:160px 5% 80px;
+  position:relative;
+  overflow:hidden;
+}
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 5%;
-      height: 56px;
-      background: rgba(13,17,23,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo {
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      color: var(--cyan);
-      letter-spacing: 0.05em;
-    }
-    .nav-links { display: flex; gap: 2rem; }
-    .nav-links a {
-      font-size: 0.82rem;
-      font-weight: 500;
-      color: var(--muted);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--cyan); }
+/* Background watermark */
+.hero-wm{
+  position:absolute;
+  right:-2%;bottom:-8%;
+  font-family:var(--display);
+  font-size:clamp(120px,18vw,220px);
+  font-weight:700;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(56,189,248,0.06);
+  letter-spacing:-0.04em;
+  user-select:none;
+  pointer-events:none;
+  z-index:0;
+  line-height:1;
+}
 
-    /* ── HERO ── */
-    #hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 100px 5% 60px;
-      position: relative;
-      overflow: hidden;
-    }
-    #hero-canvas {
-      position: absolute; inset: 0; z-index: 0;
-      width: 100%; height: 100%;
-    }
-    .hero-overlay {
-      position: absolute; inset: 0; z-index: 0;
-      background:
-        radial-gradient(ellipse 70% 60% at 15% 50%, rgba(0,80,160,0.35) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 50% at 85% 20%, rgba(0,229,255,0.08) 0%, transparent 60%),
-        linear-gradient(160deg, #0a0f1e 0%, #0d1117 50%, #080d14 100%);
-    }
-    .hero-content { position: relative; z-index: 1; max-width: 780px; }
+#hero-canvas{position:absolute;inset:0;z-index:0;width:100%;height:100%}
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:
+    radial-gradient(ellipse 60% 70% at 0% 50%, rgba(14,17,23,0.95) 40%, transparent 100%),
+    radial-gradient(ellipse 40% 40% at 100% 100%, rgba(56,189,248,0.04) 0%, transparent 70%);
+}
 
-    .hero-eyebrow {
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      color: var(--cyan);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      display: flex; align-items: center; gap: 0.6rem;
-    }
-    .hero-eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 28px; height: 1px;
-      background: var(--cyan);
-    }
+.hero-left{position:relative;z-index:2}
+.hero-right{position:relative;z-index:2}
 
-    .hero-name {
-      font-size: clamp(2.4rem, 5vw, 4.2rem);
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
-      white-space: nowrap;
-    }
-    .hero-name span { color: var(--cyan); }
+.hero-tag{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  font-family:var(--mono);font-size:0.7rem;
+  color:var(--sky);letter-spacing:0.08em;
+  margin-bottom:1.8rem;
+}
+.hero-tag::before{content:'';width:20px;height:1px;background:var(--sky)}
 
-    .hero-title {
-      font-size: clamp(1rem, 2.2vw, 1.4rem);
-      color: var(--muted);
-      font-weight: 300;
-      margin-bottom: 2.5rem;
-      letter-spacing: 0.01em;
-    }
-    .hero-title strong { color: var(--text); font-weight: 500; }
+h1.hero-name{
+  font-family:var(--display);
+  font-size:clamp(3rem,6vw,5.2rem);
+  font-weight:700;
+  line-height:0.95;
+  letter-spacing:-0.03em;
+  margin-bottom:1.4rem;
+  white-space:nowrap;
+}
 
-    /* Status ticker */
-    .status-bar {
-      display: flex; flex-wrap: wrap; gap: 0.75rem;
-      margin-bottom: 2.5rem;
-    }
-    .status-pill {
-      display: flex; align-items: center; gap: 0.5rem;
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      padding: 5px 12px;
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      background: var(--bg2);
-      color: var(--muted);
-      letter-spacing: 0.04em;
-    }
-    .dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-    .dot.green { background: var(--green); box-shadow: 0 0 6px var(--green); }
-    .dot.cyan  { background: var(--cyan);  box-shadow: 0 0 6px var(--cyan); }
-    .dot.amber { background: var(--amber); box-shadow: 0 0 6px var(--amber); }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+.hero-summary{
+  font-size:0.97rem;
+  color:var(--sub);
+  line-height:1.8;
+  max-width:520px;
+  margin-bottom:2.2rem;
+}
+.hero-summary strong{color:var(--text);font-weight:500}
 
-    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-size: 0.85rem; font-weight: 600;
-      padding: 11px 24px;
-      border-radius: 4px;
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      transition: all 0.2s;
-    }
-    .btn-primary {
-      background: var(--cyan); color: #000;
-      border: 1px solid var(--cyan);
-    }
-    .btn-primary:hover { background: transparent; color: var(--cyan); }
-    .btn-outline {
-      background: transparent; color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); }
+.hero-pills{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:2.4rem}
+.hero-pill{
+  display:flex;align-items:center;gap:0.45rem;
+  font-family:var(--mono);font-size:0.65rem;
+  padding:5px 12px;
+  border:1px solid var(--border2);
+  border-radius:2px;
+  background:var(--surface);
+  color:var(--sub);
+  letter-spacing:0.05em;
+}
+.pill-dot{width:5px;height:5px;border-radius:50%}
+.pill-dot.g{background:var(--green);box-shadow:0 0 6px var(--green)}
+.pill-dot.s{background:var(--sky);box-shadow:0 0 6px var(--sky)}
+.pill-dot.a{background:var(--amber);box-shadow:0 0 6px var(--amber)}
+@keyframes pdot{0%,100%{opacity:1}50%{opacity:0.35}}
+.pill-dot{animation:pdot 2.2s ease-in-out infinite}
 
-    /* Terminal block */
-    .hero-terminal {
-      position: absolute; right: 4%; bottom: 8%;
-      width: min(340px, 32vw);
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      z-index: 1;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,229,255,0.08);
-    }
-    .terminal-bar {
-      display: flex; align-items: center; gap: 6px;
-      padding: 10px 14px;
-      background: var(--bg3);
-      border-bottom: 1px solid var(--border);
-    }
-    .tbar-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .tbar-dot:nth-child(1){background:#ff5f57}
-    .tbar-dot:nth-child(2){background:#febc2e}
-    .tbar-dot:nth-child(3){background:#28c840}
-    .terminal-title { margin-left:auto; color: var(--muted); font-size:0.68rem; }
-    .terminal-body { padding: 16px; line-height: 1.9; }
-    .t-prompt { color: var(--cyan); }
-    .t-cmd { color: var(--text); }
-    .t-out { color: var(--muted); }
-    .t-val { color: var(--green); }
-    .t-key { color: #79c0ff; }
-    .t-cursor {
-      display: inline-block; width: 8px; height: 14px;
-      background: var(--cyan); vertical-align: middle;
-      animation: blink 1s step-end infinite;
-    }
-    @keyframes blink { 50%{opacity:0} }
+.hero-actions{display:flex;gap:0.9rem;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-family:var(--display);font-size:0.82rem;font-weight:600;
+  padding:11px 22px;border-radius:3px;text-decoration:none;
+  letter-spacing:0.02em;transition:all 0.22s;cursor:pointer;border:none;
+}
+.btn-sky{background:var(--sky);color:#020810}
+.btn-sky:hover{background:#7DD3FC;box-shadow:0 0 24px var(--sky-glow)}
+.btn-ghost{background:transparent;color:var(--sub);border:1px solid var(--border2)}
+.btn-ghost:hover{color:var(--text);border-color:var(--sky)}
 
-    /* ── SECTIONS ── */
-    section {
-      padding: 90px 5%;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .section-label {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--cyan);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 0.6rem;
-      display: flex; align-items: center; gap: 0.7rem;
-    }
-    .section-label::after {
-      content: '';
-      flex: 1; height: 1px;
-      background: linear-gradient(to right, var(--border), transparent);
-    }
-    .section-title {
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 2.5rem;
-    }
+/* ─── TERMINAL CARD (hero right) ─── */
+.term-card{
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:6px;
+  overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.04);
+}
+.term-bar{
+  display:flex;align-items:center;gap:7px;
+  padding:11px 16px;
+  background:var(--raised);
+  border-bottom:1px solid var(--border);
+}
+.tc{width:11px;height:11px;border-radius:50%}
+.tc:nth-child(1){background:#FF5F57}.tc:nth-child(2){background:#FEBC2E}.tc:nth-child(3){background:#28C840}
+.term-title{margin-left:auto;font-family:var(--mono);font-size:0.64rem;color:var(--faint)}
+.term-body{padding:18px;font-family:var(--mono);font-size:0.72rem;line-height:2}
+.tp{color:var(--sky)}.tc2{color:var(--text)}.to{color:var(--sub)}.tv{color:var(--green)}.tk{color:var(--indigo)}
+.tcur{display:inline-block;width:7px;height:13px;background:var(--sky);vertical-align:middle;animation:cur 1s step-end infinite}
+@keyframes cur{50%{opacity:0}}
 
-    /* ── ABOUT ── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-    .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 1rem; line-height: 1.8; }
-    .about-text p:last-child { margin-bottom: 0; }
+/* ─── DIVIDER ─── */
+.divider{height:1px;background:linear-gradient(to right,transparent,var(--border),transparent);margin:0 5%}
 
-    .about-stats {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
-    }
-    .stat-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 20px;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .stat-card:hover {
-      border-color: var(--cyan);
-      box-shadow: 0 0 20px var(--cyan-dim);
-    }
-    .stat-num {
-      font-family: var(--mono);
-      font-size: 2rem;
-      font-weight: 600;
-      color: var(--cyan);
-      line-height: 1;
-      margin-bottom: 0.4rem;
-    }
-    .stat-label { font-size: 0.82rem; color: var(--muted); }
+/* ─── SECTIONS ─── */
+.section{padding:88px 5%;max-width:1240px;margin:0 auto}
 
-    /* Certifications row */
-    .certs-row {
-      display: flex; flex-wrap: wrap; gap: 0.75rem;
-      margin-top: 2rem;
-    }
-    .cert-badge {
-      display: flex; align-items: center; gap: 0.5rem;
-      font-family: var(--mono); font-size: 0.72rem;
-      padding: 6px 14px;
-      background: var(--bg2);
-      border: 1px solid rgba(0,229,255,0.3);
-      border-radius: 3px;
-      color: var(--cyan);
-    }
+.sec-eyebrow{
+  display:flex;align-items:center;gap:1rem;
+  font-family:var(--mono);font-size:0.64rem;
+  color:var(--faint);letter-spacing:0.14em;text-transform:uppercase;
+  margin-bottom:1.2rem;
+}
+.sec-eyebrow::after{content:'';flex:1;height:1px;background:var(--border)}
 
-    /* ── EXPERIENCE ── */
-    #experience { max-width: 1200px; }
-    .timeline { position: relative; }
-    .timeline::before {
-      content: '';
-      position: absolute; left: 0; top: 0; bottom: 0;
-      width: 1px; background: var(--border);
-    }
-    .timeline-item {
-      position: relative;
-      padding: 0 0 3rem 2.5rem;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s, transform 0.5s;
-    }
-    .timeline-item.visible { opacity: 1; transform: translateY(0); }
-    .timeline-dot {
-      position: absolute; left: -6px; top: 6px;
-      width: 13px; height: 13px; border-radius: 50%;
-      background: var(--cyan);
-      box-shadow: 0 0 10px var(--cyan-glow);
-      border: 2px solid var(--bg);
-    }
-    .tl-meta {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-      margin-bottom: 0.5rem;
-    }
-    .tl-meta span { color: var(--cyan); }
-    .tl-role {
-      font-size: 1.2rem; font-weight: 600;
-      margin-bottom: 0.2rem;
-    }
-    .tl-company {
-      font-size: 0.9rem; color: var(--muted);
-      margin-bottom: 1rem;
-    }
-    .tl-bullets { list-style: none; }
-    .tl-bullets li {
-      position: relative;
-      font-size: 0.92rem; color: var(--muted);
-      padding-left: 1.2rem;
-      margin-bottom: 0.4rem;
-      line-height: 1.7;
-    }
-    .tl-bullets li::before {
-      content: '▸';
-      position: absolute; left: 0;
-      color: var(--cyan); font-size: 0.8rem;
-    }
+.sec-title{
+  font-family:var(--display);
+  font-size:clamp(1.8rem,3vw,2.6rem);
+  font-weight:700;letter-spacing:-0.025em;
+  margin-bottom:3rem;line-height:1.1;
+}
+.sec-title em{font-style:normal;color:var(--sky)}
 
-    /* ── SKILLS ── */
-    #skills { background: none; }
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.5rem;
-    }
-    .skill-group {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 22px 24px;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .skill-group:hover {
-      border-color: var(--cyan);
-      box-shadow: 0 0 24px var(--cyan-dim);
-    }
-    .skill-group-title {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--cyan);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-      display: flex; align-items: center; gap: 0.5rem;
-    }
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .skill-tag {
-      font-size: 0.78rem;
-      padding: 5px 10px;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      color: var(--text);
-      font-family: var(--mono);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .skill-tag i, .skill-tag .si {
-      font-size: 1rem;
-      line-height: 1;
-    }
-    /* Brand colours for devicon */
-    .skill-tag .di-azure    { color: #0078D4; }
-    .skill-tag .di-k8s      { color: #326CE5; }
-    .skill-tag .di-tf       { color: #7B42BC; }
-    .skill-tag .di-docker   { color: #2496ED; }
-    .skill-tag .di-linux    { color: #FCC624; }
-    .skill-tag .di-bash     { color: #4EAA25; }
-    .skill-tag .di-python   { color: #3776AB; }
-    .skill-tag .di-github   { color: #e6edf3; }
-    .skill-tag .di-grafana  { color: #F46800; }
-    .skill-tag .di-prom     { color: #E6522C; }
-    .skill-tag .di-helm     { color: #0F1689; }
-    .skill-tag .di-ansible  { color: #EE0000; }
-    .skill-tag .di-rancher  { color: #0075A8; }
-    .skill-tag .di-jira     { color: #0052CC; }
-    .skill-tag .di-conf     { color: #172B4D; }
-    .skill-tag .di-aws      { color: #FF9900; }
-    .skill-tag .di-ps       { color: #5391FE; }
+/* ─── ABOUT ─── */
+.about-wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:5rem;align-items:start}
+.about-body p{color:var(--sub);font-size:0.96rem;line-height:1.9;margin-bottom:1.1rem}
+.about-body p:last-child{margin-bottom:0}
+.about-body strong{color:var(--text);font-weight:500}
 
-    /* AWS level badge */
-    .aws-level {
-      font-size: 0.6rem;
-      background: rgba(255,153,0,0.15);
-      color: #FF9900;
-      border: 1px solid rgba(255,153,0,0.3);
-      border-radius: 2px;
-      padding: 1px 5px;
-      font-family: var(--mono);
-      margin-left: 2px;
-    }
+.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:1.8rem}
+.kpi{background:var(--surface);padding:22px 20px;transition:background 0.2s}
+.kpi:hover{background:var(--raised)}
+.kpi-num{font-family:var(--display);font-size:2.2rem;font-weight:700;color:var(--sky);line-height:1;margin-bottom:0.35rem;letter-spacing:-0.03em}
+.kpi-label{font-size:0.77rem;color:var(--sub);line-height:1.4}
 
-    /* ── CERTS SECTION ── */
-    .certs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1rem;
-    }
-    .cert-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 20px;
-      text-align: center;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .cert-card:hover {
-      border-color: var(--cyan);
-      box-shadow: 0 0 20px var(--cyan-dim);
-    }
-    .cert-icon { font-size: 2rem; margin-bottom: 0.8rem; }
-    .cert-name { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; }
-    .cert-org { font-size: 0.75rem; color: var(--muted); font-family: var(--mono); }
+.cert-strip{display:flex;flex-wrap:wrap;gap:0.5rem}
+.cert-pip{
+  font-family:var(--mono);font-size:0.65rem;
+  padding:5px 11px;
+  background:var(--surface);border:1px solid var(--border2);
+  border-radius:2px;color:var(--sky);letter-spacing:0.06em;
+  display:flex;align-items:center;gap:0.4rem;
+}
 
-    /* ── CONTACT ── */
-    .contact-wrap {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-    .contact-text p { color: var(--muted); font-size: 1rem; line-height: 1.8; }
-    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
-    .contact-link {
-      display: flex; align-items: center; gap: 1rem;
-      padding: 16px 20px;
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      text-decoration: none;
-      color: var(--text);
-      font-size: 0.9rem;
-      transition: all 0.2s;
-    }
-    .contact-link:hover {
-      border-color: var(--cyan);
-      color: var(--cyan);
-      box-shadow: 0 0 16px var(--cyan-dim);
-    }
-    .contact-link i { width: 20px; text-align: center; color: var(--cyan); font-size: 1.1rem; }
-    .contact-link-label { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); display: block; margin-top: 2px; }
+/* ─── EXPERIENCE ─── */
+.xp-list{display:flex;flex-direction:column;gap:0;position:relative}
+.xp-list::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--border)}
+.xp-item{padding:0 0 3.5rem 2.4rem;position:relative;opacity:0;transform:translateY(18px);transition:opacity 0.5s,transform 0.5s}
+.xp-item.visible{opacity:1;transform:translateY(0)}
+.xp-node{position:absolute;left:-5px;top:4px;width:11px;height:11px;border-radius:50%;background:var(--sky);box-shadow:0 0 12px var(--sky-glow);border:2px solid var(--void)}
+.xp-when{font-family:var(--mono);font-size:0.65rem;color:var(--faint);letter-spacing:0.08em;margin-bottom:0.5rem}
+.xp-when b{color:var(--sky)}
+.xp-role{font-family:var(--display);font-size:1.2rem;font-weight:600;letter-spacing:-0.01em;margin-bottom:0.2rem}
+.xp-org{font-size:0.85rem;color:var(--sub);margin-bottom:0.3rem}
+.xp-proj{font-family:var(--mono);font-size:0.62rem;color:var(--indigo);letter-spacing:0.08em;margin-bottom:1.1rem;text-transform:uppercase}
+.xp-bullets{list-style:none}
+.xp-bullets li{position:relative;padding-left:1.2rem;font-size:0.88rem;color:var(--sub);line-height:1.8;margin-bottom:0.45rem}
+.xp-bullets li::before{content:'→';position:absolute;left:0;color:var(--sky);font-size:0.78rem;top:0.15rem}
+.xp-bullets li b{color:var(--text);font-weight:500}
 
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem 5%;
-      text-align: center;
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--muted);
-    }
-    footer span { color: var(--cyan); }
+/* ─── SKILLS ─── */
+.skills-wrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.2rem}
+.skill-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:6px;
+  overflow:hidden;transition:border-color 0.22s,box-shadow 0.22s;
+}
+.skill-card:hover{border-color:var(--border2);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+.skill-card-head{
+  display:flex;align-items:center;gap:0.7rem;
+  padding:14px 18px 12px;
+  border-bottom:1px solid var(--border);
+  font-family:var(--mono);font-size:0.65rem;color:var(--sub);letter-spacing:0.1em;text-transform:uppercase;
+}
+.sk-accent{width:3px;height:16px;border-radius:2px;flex-shrink:0}
+.sk-blue{background:var(--sky)}.sk-ind{background:var(--indigo)}.sk-grn{background:var(--green)}.sk-amb{background:var(--amber)}
+.skill-card-body{padding:14px 18px 16px;display:flex;flex-wrap:wrap;gap:0.4rem}
+.stag{
+  font-family:var(--mono);font-size:0.7rem;
+  padding:4px 9px;
+  background:var(--raised);border:1px solid var(--border2);border-radius:2px;
+  color:var(--sub);display:inline-flex;align-items:center;gap:5px;
+  transition:color 0.18s,border-color 0.18s;
+}
+.skill-card:hover .stag{color:var(--text)}
+.stag i,.stag .si{font-size:0.88rem;line-height:1}
+.di-az{color:#0078D4}.di-k8s{color:#326CE5}.di-tf{color:#7B42BC}.di-dk{color:#2496ED}
+.di-lx{color:#FCC624}.di-sh{color:#4EAA25}.di-py{color:#3776AB}.di-gh{color:#C9D1D9}
+.di-gf{color:#F46800}.di-pm{color:#E6522C}.di-ji{color:#0052CC}.di-cf{color:#3d7fc1}
+.di-aw{color:#FF9900}.di-ps{color:#5391FE}
+.aws-badge{font-size:0.55rem;background:rgba(255,153,0,0.12);color:#FF9900;border:1px solid rgba(255,153,0,0.25);border-radius:2px;padding:1px 4px;margin-left:2px}
 
-    /* ── SCROLL ANIMATIONS ── */
-    .fade-up {
-      opacity: 0; transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
+/* ─── ACHIEVEMENTS ─── */
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.2rem}
+.ach-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:6px;
+  padding:22px;display:flex;gap:1rem;align-items:flex-start;
+  transition:border-color 0.22s,transform 0.22s;
+}
+.ach-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.ach-icon{font-size:1.4rem;flex-shrink:0;margin-top:1px;line-height:1}
+.ach-title{font-family:var(--display);font-size:0.9rem;font-weight:600;margin-bottom:0.35rem;letter-spacing:-0.01em}
+.ach-desc{font-size:0.8rem;color:var(--sub);line-height:1.7}
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .hero-terminal { display: none; }
-      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .contact-wrap { grid-template-columns: 1fr; }
-      .hero-name { font-size: 2.4rem; }
-    }
-    @media (max-width: 600px) {
-      nav .nav-links { display: none; }
-      .about-stats { grid-template-columns: 1fr 1fr; }
-      section { padding: 60px 5%; }
-    }
+/* ─── CERTIFICATIONS ─── */
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1.1rem}
+.cert-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:6px;
+  padding:26px 20px;text-align:center;
+  transition:border-color 0.22s,box-shadow 0.22s;
+}
+.cert-card:hover{border-color:var(--sky);box-shadow:0 0 28px var(--sky-dim)}
+.cert-icon-wrap{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--raised);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;margin:0 auto 1rem;
+}
+.cert-code{font-family:var(--display);font-size:1.1rem;font-weight:700;margin-bottom:0.25rem;letter-spacing:-0.02em}
+.cert-name{font-size:0.78rem;color:var(--sub);line-height:1.4;font-family:var(--body)}
 
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
+/* ─── EDUCATION / EXTRAS ─── */
+.extras-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem}
+.extras-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:6px;
+  padding:22px;transition:border-color 0.22s;
+}
+.extras-card:hover{border-color:var(--border2)}
+.extras-head{
+  font-family:var(--mono);font-size:0.63rem;color:var(--faint);
+  letter-spacing:0.12em;text-transform:uppercase;
+  margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;
+}
+.extras-card p{font-size:0.88rem;color:var(--sub);line-height:1.7}
+.extras-card strong{color:var(--text);font-weight:500}
+.tag-row{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.7rem}
+.etag{font-family:var(--mono);font-size:0.67rem;padding:4px 9px;background:var(--raised);border:1px solid var(--border2);border-radius:2px;color:var(--sub)}
 
-    /* Reduce motion */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-    }
-  </style>
+/* ─── CONTACT ─── */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.contact-body p{color:var(--sub);font-size:0.95rem;line-height:1.85;margin-bottom:1rem}
+.contact-body strong{color:var(--text)}
+.clink-list{display:flex;flex-direction:column;gap:0.8rem}
+.clink{
+  display:flex;align-items:center;gap:1rem;padding:15px 18px;
+  background:var(--surface);border:1px solid var(--border);border-radius:5px;
+  text-decoration:none;color:var(--text);font-size:0.88rem;
+  transition:all 0.2s;
+}
+.clink:hover{border-color:var(--sky);background:var(--raised);box-shadow:0 0 20px var(--sky-dim)}
+.clink i{color:var(--sky);width:18px;text-align:center;font-size:1rem}
+.clink-sub{display:block;font-family:var(--mono);font-size:0.63rem;color:var(--faint);margin-top:2px}
+
+/* ─── FOOTER ─── */
+footer{
+  border-top:1px solid var(--border);
+  padding:2rem 5%;text-align:center;
+  font-family:var(--mono);font-size:0.65rem;color:var(--faint);
+}
+footer b{color:var(--sky)}
+
+/* ─── FADE IN ─── */
+.fi{opacity:0;transform:translateY(20px);transition:opacity 0.55s ease,transform 0.55s ease}
+.fi.visible{opacity:1;transform:translateY(0)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1024px){
+  #hero{grid-template-columns:1fr;padding-top:120px}
+  .hero-right{display:none}
+  .hero-wm{display:none}
+  .about-wrap{grid-template-columns:1fr;gap:2.5rem}
+  .contact-wrap{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .nav-links{display:none}
+  .section{padding:60px 5%}
+  .sysbar{display:none}
+  nav{top:0}
+  #hero{padding-top:90px}
+  h1.hero-name{white-space:normal;font-size:2.4rem}
+}
+
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--void)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--sky)}
+@media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
+</style>
 </head>
 <body>
 
+<!-- SYSTEM BAR -->
+<div class="sysbar">
+  <div class="sysbar-item"><span class="sysbar-dot"></span> SYSTEMS</div>
+  <div class="sysbar-item">CLUSTERS <span class="sysbar-val">15+ ONLINE</span></div>
+  <div class="sysbar-item">STACKS <span class="sysbar-val">50+ ACTIVE</span></div>
+  <div class="sysbar-item">REGIONS <span class="sysbar-val">4</span></div>
+  <div class="sysbar-item">UPTIME <span class="sysbar-val">99.9%</span></div>
+  <div class="sysbar-right">vikram@platform ~ infra.engineer</div>
+</div>
+
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">VP <span style="color:var(--muted)">// infra.engineer</span></div>
+  <div class="nav-logo">Vikram <span>Panda</span></div>
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#experience">Experience</a>
     <a href="#skills">Skills</a>
+    <a href="#achievements">Achievements</a>
     <a href="#certifications">Certifications</a>
     <a href="#contact">Contact</a>
   </div>
@@ -523,415 +407,419 @@
 <section id="hero">
   <canvas id="hero-canvas"></canvas>
   <div class="hero-overlay"></div>
+  <div class="hero-wm">INFRA</div>
 
-  <div class="hero-content">
-    <div class="hero-eyebrow">Infrastructure & Platform Engineering</div>
+  <div class="hero-left">
+    <div class="hero-tag">Infrastructure &amp; Platform Engineering · London, UK</div>
     <h1 class="hero-name">Vikram Panda</h1>
-    <p class="hero-title">
-      <strong>8 years</strong> designing cloud-native infrastructure ·
-      Azure Expert · AWS Intermediate · Kubernetes · Terraform · CI/CD
+    <p class="hero-summary">
+      <strong>9+ years</strong> designing and hardening enterprise cloud platforms for global clients.
+      Azure expert. AWS intermediate. Kubernetes, Terraform, Terragrunt, Zero Trust, DevSecOps.
+      Currently progressing toward <strong>Cloud / Platform Architect</strong>.
     </p>
-
-    <div class="status-bar">
-      <div class="status-pill"><span class="dot green"></span> AKS Clusters · ONLINE</div>
-      <div class="status-pill"><span class="dot cyan"></span> Terraform Pipelines · RUNNING</div>
-      <div class="status-pill"><span class="dot green"></span> Monitoring · ACTIVE</div>
+    <div class="hero-pills">
+      <div class="hero-pill"><span class="pill-dot g"></span>AKS CLUSTERS · ONLINE</div>
+      <div class="hero-pill"><span class="pill-dot s"></span>TERRAFORM · RUNNING</div>
+      <div class="hero-pill"><span class="pill-dot g"></span>GRAFANA · ACTIVE</div>
+      <div class="hero-pill"><span class="pill-dot a"></span>ZERO TRUST · ENFORCED</div>
     </div>
-
-    <div class="hero-cta">
-      <a href="#experience" class="btn btn-primary"><i class="fas fa-terminal"></i> View Experience</a>
-      <a href="#contact" class="btn btn-outline"><i class="fas fa-paper-plane"></i> Get in Touch</a>
+    <div class="hero-actions">
+      <a href="#experience" class="btn btn-sky"><i class="fas fa-terminal"></i>View Experience</a>
+      <a href="#contact" class="btn btn-ghost"><i class="fas fa-arrow-right"></i>Get in Touch</a>
     </div>
   </div>
 
-  <!-- Terminal widget -->
-  <div class="hero-terminal">
-    <div class="terminal-bar">
-      <div class="tbar-dot"></div><div class="tbar-dot"></div><div class="tbar-dot"></div>
-      <div class="terminal-title">vikram@platform ~ zsh</div>
-    </div>
-    <div class="terminal-body">
-      <div><span class="t-prompt">❯</span> <span class="t-cmd">terraform plan</span></div>
-      <div class="t-out">Refreshing state… <span class="t-val">done.</span></div>
-      <div class="t-out">Plan: <span class="t-val">12 to add</span>, 0 to change, 0 to destroy.</div>
-      <br>
-      <div><span class="t-prompt">❯</span> <span class="t-cmd">kubectl get nodes</span></div>
-      <div class="t-out"><span class="t-key">NAME</span>           STATUS   ROLES</div>
-      <div class="t-out">aks-nodepool-01  <span class="t-val">Ready</span>    &lt;none&gt;</div>
-      <div class="t-out">aks-nodepool-02  <span class="t-val">Ready</span>    &lt;none&gt;</div>
-      <div class="t-out">aks-nodepool-03  <span class="t-val">Ready</span>    &lt;none&gt;</div>
-      <br>
-      <div><span class="t-prompt">❯</span> <span class="t-cmd">az aks show --query powerState</span></div>
-      <div class="t-out"><span class="t-val">"Running"</span></div>
-      <br>
-      <div><span class="t-prompt">❯</span> <span class="t-cursor"></span></div>
+  <div class="hero-right">
+    <div class="term-card">
+      <div class="term-bar">
+        <div class="tc"></div><div class="tc"></div><div class="tc"></div>
+        <div class="term-title">vikram@platform — zsh</div>
+      </div>
+      <div class="term-body">
+        <div><span class="tp">❯</span> <span class="tc2">terragrunt run-all plan</span></div>
+        <div class="to">Stack: <span class="tv">50 modules</span> · 4 regions</div>
+        <div class="to">Plan: <span class="tv">18 to add</span>, 0 to destroy.</div>
+        <br>
+        <div><span class="tp">❯</span> <span class="tc2">kubectl get nodes</span></div>
+        <div class="to"><span class="tk">NAME</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STATUS</div>
+        <div class="to">aks-prod-01&nbsp;&nbsp;<span class="tv">Ready</span></div>
+        <div class="to">aks-prod-02&nbsp;&nbsp;<span class="tv">Ready</span></div>
+        <div class="to">aks-demo-01&nbsp;&nbsp;<span class="tv">Ready</span></div>
+        <br>
+        <div><span class="tp">❯</span> <span class="tc2">az cost show</span></div>
+        <div class="to">Savings: <span class="tv">£7,200 / yr</span></div>
+        <br>
+        <div><span class="tp">❯</span> <span class="tcur"></span></div>
+      </div>
     </div>
   </div>
 </section>
+
+<div class="divider"></div>
 
 <!-- ABOUT -->
-<section id="about">
-  <div class="section-label">01 — About</div>
-  <h2 class="section-title">Building systems that don't blink.</h2>
-
-  <div class="about-grid">
-    <div class="about-text fade-up">
-      <p>I'm a Infrastructure & DevOps Engineer with <strong>8 years</strong> of hands-on experience designing, automating, and hardening scalable cloud infrastructure. Currently at <strong>Arcadis</strong> within the Intelligence segment, I lead platform engineering efforts across Azure, AKS, and Terraform at enterprise scale.</p>
-      <p>My primary expertise is <strong>Microsoft Azure</strong> at an advanced level — AKS, Key Vault, ARM, Azure DevOps, and Monitor. I also bring solid <strong>AWS intermediate experience</strong> across EC2, S3, EKS, Lambda, IAM, and CloudFormation, giving me multi-cloud fluency that's increasingly valuable at enterprise scale.</p>
-      <p>I'm currently working toward a Platform/Cloud Architect role, with AZ-305 next on the certifications roadmap.</p>
-
-      <div class="certs-row">
-        <div class="cert-badge"><i class="fas fa-certificate"></i> AZ-900</div>
-        <div class="cert-badge"><i class="fas fa-certificate"></i> AZ-204</div>
-        <div class="cert-badge"><i class="fas fa-certificate"></i> AZ-400</div>
-        <div class="cert-badge"><i class="fas fa-certificate"></i> CKA</div>
-      </div>
+<div class="section" id="about">
+  <div class="sec-eyebrow">Profile</div>
+  <h2 class="sec-title">Engineering infrastructure<br>at <em>enterprise scale.</em></h2>
+  <div class="about-wrap">
+    <div class="about-body fi">
+      <p>Infrastructure &amp; DevOps Engineer with <strong>9+ years</strong> of progressive experience delivering enterprise-grade cloud platforms, automation frameworks, and DevSecOps pipelines for international clients across the engineering and healthcare sectors.</p>
+      <p>Deep expertise across the full platform engineering lifecycle — from designing scalable <strong>Azure and AWS infrastructure</strong> using Terraform, Terraspace, and Terragrunt, to managing production Kubernetes clusters, implementing <strong>Zero Trust networking</strong> with Twingate, and embedding security into CI/CD pipelines via Checkmarx and SonarQube.</p>
+      <p>Proven ability to drive cost optimisation initiatives, lead complex cloud migrations, and champion IaC best practices across multi-team environments.</p>
     </div>
-
-    <div class="about-stats fade-up">
-      <div class="stat-card">
-        <div class="stat-num">8+</div>
-        <div class="stat-label">Years in infrastructure</div>
+    <div class="fi">
+      <div class="kpi-grid">
+        <div class="kpi"><div class="kpi-num">9+</div><div class="kpi-label">Years in infrastructure &amp; DevOps</div></div>
+        <div class="kpi"><div class="kpi-num">15+</div><div class="kpi-label">AKS clusters managed in production</div></div>
+        <div class="kpi"><div class="kpi-num">50+</div><div class="kpi-label">Terraform stacks · 4 regions</div></div>
+        <div class="kpi"><div class="kpi-num">£7.2k</div><div class="kpi-label">Annual Azure cost savings delivered</div></div>
       </div>
-      <div class="stat-card">
-        <div class="stat-num">4</div>
-        <div class="stat-label">Cloud certifications</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">2</div>
-        <div class="stat-label">Enterprise employers</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">100%</div>
-        <div class="stat-label">Azure-native stack</div>
+      <div class="cert-strip">
+        <div class="cert-pip"><i class="fas fa-certificate"></i>CKA</div>
+        <div class="cert-pip"><i class="fas fa-certificate"></i>AZ-400</div>
+        <div class="cert-pip"><i class="fas fa-certificate"></i>AZ-204</div>
+        <div class="cert-pip"><i class="fas fa-certificate"></i>AZ-900</div>
       </div>
     </div>
   </div>
-</section>
+</div>
+
+<div class="divider"></div>
 
 <!-- EXPERIENCE -->
-<section id="experience" style="max-width:1200px; margin:0 auto; padding:90px 5%;">
-  <div class="section-label">02 — Experience</div>
-  <h2 class="section-title">Career timeline.</h2>
+<div class="section" id="experience">
+  <div class="sec-eyebrow">Work History</div>
+  <h2 class="sec-title">Career <em>timeline.</em></h2>
+  <div class="xp-list">
 
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="tl-meta"><span>Nov 2021 – Present</span> · London, UK</div>
-      <div class="tl-role">Infrastructure & DevOps Engineer</div>
-      <div class="tl-company">Arcadis · Intelligence Segment</div>
-      <ul class="tl-bullets">
-        <li>Design and maintain enterprise-scale Azure infrastructure using Terraform and Terraspace, enforcing IaC best practices and module reusability.</li>
-        <li>Manage AKS clusters across multiple environments — provisioning, RBAC, secret management via Azure Key Vault, and Helm-based deployments.</li>
-        <li>Build and maintain CI/CD pipelines in GitHub Actions and Azure DevOps, reducing deployment lead times significantly.</li>
-        <li>Lead observability initiatives with Prometheus & Grafana, establishing SLO dashboards and alerting for production workloads.</li>
-        <li>Implement federated identity (OIDC) for GitHub Actions to Azure, eliminating static credential usage in pipelines.</li>
-        <li>Deployed Function Apps (acmebot) via ARM templates within Terraspace for automated TLS certificate management.</li>
+    <div class="xp-item">
+      <div class="xp-node"></div>
+      <div class="xp-when"><b>Nov 2021 – Present</b> · London, UK</div>
+      <div class="xp-role">Infrastructure &amp; DevOps Engineer</div>
+      <div class="xp-org">Arcadis Gen</div>
+      <div class="xp-proj">Arcadis Gen Cloud · SaaS Product · Team: 5</div>
+      <ul class="xp-bullets">
+        <li>Architected Azure infrastructure (IaaS &amp; PaaS) across <b>4+ subscriptions</b> using Terraform and Terraspace — consistent, drift-free deployments across dev, test, demo, and production.</li>
+        <li>Introduced <b>Terragrunt</b> to orchestrate 50+ stacks across 4 regions (UK South, East US, Australia East, Canada Central) — eliminating config duplication at scale.</li>
+        <li>Implemented <b>Zero Trust network access</b> via Twingate across AWS EC2 and Azure, replacing legacy VPN with a more secure, auditable model.</li>
+        <li>Delivered Azure cost optimisation saving <b>£7,200 annually</b> — right-sizing VMs, removing orphaned disks, rationalising Reserved Instances.</li>
+        <li>Deployed <b>acmebot v5</b> (ARM templates in Terraspace) automating renewal of 10+ SSL certificates on 90-day cycles across 3 environments.</li>
+        <li>Built CI/CD pipelines in Azure DevOps and GitHub Actions with <b>federated OIDC</b> for credential-free deployments.</li>
+        <li>Managed <b>15+ AKS clusters</b> via Rancher — multi-namespace secrets with Azure Key Vault, Workload Identity, and Secrets Store CSI Driver.</li>
+        <li>Configured full observability stack (<b>Grafana, Mimir, Loki, Prometheus</b>) for full-stack visibility.</li>
+        <li>Achieved <b>2nd place</b> in Secure Code Warrior Terraform Azure Security Tournament (6,240 / 6,800 pts).</li>
+        <li>Managed Azure Backup Vault for DR, meeting all RPO/RTO targets for critical workloads.</li>
       </ul>
     </div>
 
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="tl-meta"><span>Aug 2017 – Oct 2021</span> · UK</div>
-      <div class="tl-role">DevOps Engineer</div>
-      <div class="tl-company">Datamatics Global Services Ltd · Client: Bupa Health Insurance UK</div>
-      <ul class="tl-bullets">
-        <li>Configured, maintained, and monitored infrastructure supporting Bupa's UK health insurance platform.</li>
-        <li>Automated deployment workflows using CI/CD tooling, improving release cadence and reducing manual intervention.</li>
-        <li>Managed containerised workloads with Docker and contributed to Kubernetes adoption across teams.</li>
-        <li>Developed Bash and PowerShell automation scripts for operational tasks and environment provisioning.</li>
-        <li>Collaborated with cross-functional teams to align infrastructure delivery with product release cycles.</li>
+    <div class="xp-item">
+      <div class="xp-node"></div>
+      <div class="xp-when"><b>Aug 2017 – Oct 2021</b> · London, UK</div>
+      <div class="xp-role">Build, Release &amp; DevOps Engineer</div>
+      <div class="xp-org">Datamatics Global Services · Client: BUPA Health Insurance UK</div>
+      <div class="xp-proj">Sitecore Web App · Swift Windows App · Team: 4</div>
+      <ul class="xp-bullets">
+        <li>Led <b>DevSecOps integration</b> embedding Checkmarx SAST and SonarQube into TFS, TeamCity, and Azure DevOps pipelines.</li>
+        <li>Spearheaded end-to-end <b>CI/CD migration</b> from TFS on-prem and TeamCity to Azure DevOps Server with minimal downtime.</li>
+        <li>Managed all <b>Azure IaaS &amp; PaaS resources</b> for Sitecore environments — VMs, WebApps, Storage, NSGs, VNets, Key Vaults.</li>
+        <li>Implemented <b>Azure Automation Runbooks</b> for scheduled infrastructure tasks, reducing manual overhead.</li>
+        <li>Led client sign-off sessions, quality reporting, and stakeholder communication throughout release cycles.</li>
+        <li>Received <b>Appreciation Award (2018)</b> for leading the BUPA DevSecOps pipeline transformation.</li>
       </ul>
     </div>
+
   </div>
-</section>
+</div>
+
+<div class="divider"></div>
 
 <!-- SKILLS -->
-<section id="skills">
-  <div class="section-label">03 — Skills</div>
-  <h2 class="section-title fade-up">Tech I work with daily.</h2>
+<div class="section" id="skills">
+  <div class="sec-eyebrow">Competencies</div>
+  <h2 class="sec-title">Tech I work with <em>daily.</em></h2>
+  <div class="skills-wrap">
 
-  <div class="skills-grid">
-    <div class="skill-group fade-up">
-      <div class="skill-group-title"><i class="fas fa-cloud"></i> Azure Cloud</div>
-      <div class="skill-tags">
-        <span class="skill-tag"><i class="devicon-azure-plain di-azure"></i> Microsoft Azure</span>
-        <span class="skill-tag"><i class="devicon-kubernetes-plain di-k8s"></i> AKS</span>
-        <span class="skill-tag"><i class="devicon-azure-plain di-azure"></i> Azure DevOps</span>
-        <span class="skill-tag"><i class="devicon-azure-plain di-azure"></i> Key Vault</span>
-        <span class="skill-tag"><i class="devicon-azure-plain di-azure"></i> ARM Templates</span>
-        <span class="skill-tag"><i class="devicon-azure-plain di-azure"></i> Azure Monitor</span>
+    <div class="skill-card fi">
+      <div class="skill-card-head"><div class="sk-accent sk-blue"></div>Cloud Platforms</div>
+      <div class="skill-card-body">
+        <span class="stag"><i class="devicon-azure-plain di-az"></i>Microsoft Azure</span>
+        <span class="stag"><i class="devicon-amazonwebservices-plain-wordmark di-aw"></i>AWS<span class="aws-badge">Intermediate</span></span>
+        <span class="stag"><i class="devicon-kubernetes-plain di-k8s"></i>AKS</span>
+        <span class="stag"><i class="devicon-amazonwebservices-plain-wordmark di-aw"></i>EKS</span>
       </div>
     </div>
-    <div class="skill-group fade-up">
-      <div class="skill-group-title"><i class="fab fa-aws" style="color:#FF9900"></i> AWS <span class="aws-level">Intermediate</span></div>
-      <div class="skill-tags">
-        <span class="skill-tag"><i class="devicon-amazonwebservices-plain-wordmark di-aws"></i> EC2 &amp; VPC</span>
-        <span class="skill-tag"><i class="devicon-amazonwebservices-plain-wordmark di-aws"></i> S3 &amp; IAM</span>
-        <span class="skill-tag"><i class="devicon-amazonwebservices-plain-wordmark di-aws"></i> EKS</span>
-        <span class="skill-tag"><i class="devicon-amazonwebservices-plain-wordmark di-aws"></i> CloudFormation</span>
-        <span class="skill-tag"><i class="devicon-amazonwebservices-plain-wordmark di-aws"></i> Lambda</span>
-        <span class="skill-tag"><i class="devicon-amazonwebservices-plain-wordmark di-aws"></i> CloudWatch</span>
+
+    <div class="skill-card fi">
+      <div class="skill-card-head"><div class="sk-accent sk-ind"></div>IaC &amp; GitOps</div>
+      <div class="skill-card-body">
+        <span class="stag"><i class="devicon-terraform-plain di-tf"></i>Terraform</span>
+        <span class="stag"><svg class="si" width="13" height="13" viewBox="0 0 32 32"><rect width="32" height="32" rx="3" fill="#7B42BC"/><text x="4" y="22" font-size="13" font-weight="bold" fill="white" font-family="monospace">TS</text></svg>Terraspace</span>
+        <span class="stag"><i class="devicon-terraform-plain di-tf"></i>Terragrunt</span>
+        <span class="stag"><i class="fas fa-code-branch" style="color:#C9D1D9"></i>Flux CD</span>
+        <span class="stag"><i class="fas fa-layer-group" style="color:#326CE5"></i>Kustomize</span>
       </div>
     </div>
-    <div class="skill-group fade-up">
-      <div class="skill-group-title"><i class="fas fa-code-branch"></i> Infrastructure as Code</div>
-      <div class="skill-tags">
-        <span class="skill-tag"><i class="devicon-terraform-plain di-tf"></i> Terraform</span>
-        <span class="skill-tag"><svg class="si" width="14" height="14" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="4" fill="#7B42BC"/><text x="4" y="22" font-size="14" font-weight="bold" fill="white" font-family="monospace">TS</text></svg> Terraspace</span>
-        <span class="skill-tag"><svg class="si" width="14" height="14" viewBox="0 0 128 128"><path d="M64 0C28.7 0 0 28.7 0 64s28.7 64 64 64 64-28.7 64-64S99.3 0 64 0z" fill="#0F1689"/><path d="M38 88V40l26 24 26-24v48" stroke="white" stroke-width="8" fill="none" stroke-linejoin="round"/></svg> Helm</span>
-        <span class="skill-tag"><i class="devicon-ansible-plain di-ansible"></i> Ansible</span>
-        <span class="skill-tag"><i class="devicon-azure-plain di-azure"></i> Bicep</span>
+
+    <div class="skill-card fi">
+      <div class="skill-card-head"><div class="sk-accent sk-grn"></div>CI / CD</div>
+      <div class="skill-card-body">
+        <span class="stag"><i class="devicon-azure-plain di-az"></i>Azure DevOps</span>
+        <span class="stag"><i class="devicon-github-original di-gh"></i>GitHub Actions</span>
+        <span class="stag"><i class="fas fa-server" style="color:#FBBF24"></i>TeamCity</span>
+        <span class="stag"><i class="fas fa-cogs" style="color:#94A3B8"></i>TFS / VSTS</span>
+        <span class="stag"><i class="fas fa-rocket" style="color:#38BDF8"></i>Octopus Deploy</span>
+        <span class="stag"><i class="fas fa-key" style="color:#FBBF24"></i>OIDC Federated ID</span>
       </div>
     </div>
-    <div class="skill-group fade-up">
-      <div class="skill-group-title"><i class="fab fa-docker" style="color:#2496ED"></i> Containers & Orchestration</div>
-      <div class="skill-tags">
-        <span class="skill-tag"><i class="devicon-kubernetes-plain di-k8s"></i> Kubernetes</span>
-        <span class="skill-tag"><i class="devicon-docker-plain di-docker"></i> Docker</span>
-        <span class="skill-tag"><svg class="si" width="14" height="14" viewBox="0 0 32 32"><rect width="32" height="32" rx="3" fill="#0075A8"/><text x="4" y="22" font-size="12" font-weight="bold" fill="white" font-family="sans-serif">R</text></svg> Rancher</span>
-        <span class="skill-tag"><i class="fas fa-shield-alt" style="color:#00e5ff;font-size:0.85rem"></i> Container Security</span>
+
+    <div class="skill-card fi">
+      <div class="skill-card-head"><div class="sk-accent sk-blue"></div>Containers &amp; K8s</div>
+      <div class="skill-card-body">
+        <span class="stag"><i class="devicon-kubernetes-plain di-k8s"></i>Kubernetes (CKA)</span>
+        <span class="stag"><i class="devicon-docker-plain di-dk"></i>Docker</span>
+        <span class="stag"><svg class="si" width="13" height="13" viewBox="0 0 32 32"><rect width="32" height="32" rx="3" fill="#0075A8"/><text x="5" y="22" font-size="13" font-weight="bold" fill="white" font-family="sans-serif">R</text></svg>Rancher</span>
+        <span class="stag"><svg class="si" width="13" height="13" viewBox="0 0 128 128"><circle cx="64" cy="64" r="64" fill="#0F1689"/><path d="M38 88V40l26 24 26-24v48" stroke="white" stroke-width="8" fill="none" stroke-linejoin="round"/></svg>Helm</span>
       </div>
     </div>
-    <div class="skill-group fade-up">
-      <div class="skill-group-title"><i class="fas fa-infinity"></i> CI/CD</div>
-      <div class="skill-tags">
-        <span class="skill-tag"><i class="devicon-github-original di-github"></i> GitHub Actions</span>
-        <span class="skill-tag"><i class="devicon-azure-plain di-azure"></i> Azure Pipelines</span>
-        <span class="skill-tag"><i class="fas fa-key" style="color:#d29922;font-size:0.8rem"></i> OIDC / Federated ID</span>
-        <span class="skill-tag"><i class="devicon-github-original di-github"></i> Copilot CLI</span>
+
+    <div class="skill-card fi">
+      <div class="skill-card-head"><div class="sk-accent sk-amb"></div>Networking &amp; Security</div>
+      <div class="skill-card-body">
+        <span class="stag"><i class="fas fa-lock" style="color:#38BDF8"></i>Twingate (Zero Trust)</span>
+        <span class="stag"><i class="fas fa-network-wired" style="color:#0078D4"></i>NSG / WAF / VNet</span>
+        <span class="stag"><i class="fas fa-shield-alt" style="color:#FBBF24"></i>OWASP</span>
+        <span class="stag"><i class="fas fa-graduation-cap" style="color:#34D399"></i>CCNA (Training)</span>
       </div>
     </div>
-    <div class="skill-group fade-up">
-      <div class="skill-group-title"><i class="fas fa-chart-line"></i> Observability</div>
-      <div class="skill-tags">
-        <span class="skill-tag"><i class="devicon-prometheus-original di-prom"></i> Prometheus</span>
-        <span class="skill-tag"><i class="devicon-grafana-original di-grafana"></i> Grafana</span>
-        <span class="skill-tag"><i class="devicon-azure-plain di-azure"></i> Azure Monitor</span>
-        <span class="skill-tag"><i class="devicon-azure-plain di-azure"></i> Log Analytics</span>
+
+    <div class="skill-card fi">
+      <div class="skill-card-head"><div class="sk-accent sk-grn"></div>Monitoring &amp; Obs.</div>
+      <div class="skill-card-body">
+        <span class="stag"><i class="devicon-grafana-original di-gf"></i>Grafana</span>
+        <span class="stag"><i class="devicon-prometheus-original di-pm"></i>Prometheus</span>
+        <span class="stag"><i class="fas fa-database" style="color:#F46800"></i>Mimir</span>
+        <span class="stag"><i class="fas fa-align-left" style="color:#F46800"></i>Loki</span>
+        <span class="stag"><i class="devicon-azure-plain di-az"></i>App Insights</span>
       </div>
     </div>
-    <div class="skill-group fade-up">
-      <div class="skill-group-title"><i class="fas fa-terminal"></i> Scripting & Tooling</div>
-      <div class="skill-tags">
-        <span class="skill-tag"><i class="devicon-bash-plain di-bash"></i> Bash</span>
-        <span class="skill-tag"><i class="devicon-powershell-plain di-ps"></i> PowerShell</span>
-        <span class="skill-tag"><i class="devicon-linux-plain di-linux"></i> Linux</span>
-        <span class="skill-tag"><i class="devicon-python-plain di-python"></i> Python</span>
-        <span class="skill-tag"><i class="devicon-jira-plain di-jira"></i> Jira</span>
-        <span class="skill-tag"><i class="devicon-confluence-original di-conf"></i> Confluence</span>
+
+    <div class="skill-card fi">
+      <div class="skill-card-head"><div class="sk-accent sk-ind"></div>DevSecOps</div>
+      <div class="skill-card-body">
+        <span class="stag"><i class="fas fa-bug" style="color:#E6522C"></i>Checkmarx</span>
+        <span class="stag"><i class="fas fa-check-circle" style="color:#4EAA25"></i>SonarQube</span>
+        <span class="stag"><i class="fas fa-trophy" style="color:#FBBF24"></i>Secure Code Warrior</span>
+        <span class="stag"><i class="fas fa-shield-virus" style="color:#38BDF8"></i>OWASP</span>
       </div>
+    </div>
+
+    <div class="skill-card fi">
+      <div class="skill-card-head"><div class="sk-accent sk-blue"></div>Scripting &amp; Dev</div>
+      <div class="skill-card-body">
+        <span class="stag"><i class="devicon-powershell-plain di-ps"></i>PowerShell</span>
+        <span class="stag"><i class="devicon-bash-plain di-sh"></i>Bash</span>
+        <span class="stag"><i class="devicon-python-plain di-py"></i>Python</span>
+        <span class="stag"><i class="fas fa-code" style="color:#9b59b6"></i>C#</span>
+        <span class="stag"><i class="devicon-linux-plain di-lx"></i>Linux</span>
+        <span class="stag"><i class="fas fa-file-code" style="color:#94A3B8"></i>YAML</span>
+      </div>
+    </div>
+
+    <div class="skill-card fi">
+      <div class="skill-card-head"><div class="sk-accent sk-grn"></div>Agile &amp; Collab.</div>
+      <div class="skill-card-body">
+        <span class="stag"><i class="devicon-jira-plain di-ji"></i>Jira</span>
+        <span class="stag"><i class="devicon-azure-plain di-az"></i>Azure Boards</span>
+        <span class="stag"><i class="devicon-confluence-original di-cf"></i>Confluence</span>
+        <span class="stag"><i class="fas fa-draw-polygon" style="color:#38BDF8"></i>draw.io</span>
+        <span class="stag"><i class="fas fa-sticky-note" style="color:#FBBF24"></i>Miro</span>
+      </div>
+    </div>
+
+    <div class="skill-card fi">
+      <div class="skill-card-head"><div class="sk-accent sk-ind"></div>AI &amp; Emerging Tech</div>
+      <div class="skill-card-body">
+        <span class="stag"><i class="fas fa-brain" style="color:#38BDF8"></i>Claude AI</span>
+        <span class="stag"><i class="fas fa-project-diagram" style="color:#818CF8"></i>AI Agentic Workflows</span>
+        <span class="stag"><i class="fas fa-comment-dots" style="color:#34D399"></i>LLM Integration</span>
+        <span class="stag"><i class="devicon-azure-plain di-az"></i>Azure OpenAI</span>
+        <span class="stag"><i class="fas fa-plug" style="color:#FBBF24"></i>MCP Tooling</span>
+        <span class="stag"><i class="fas fa-magic" style="color:#818CF8"></i>Prompt Engineering</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ACHIEVEMENTS -->
+<div class="section" id="achievements">
+  <div class="sec-eyebrow">Recognition</div>
+  <h2 class="sec-title">Awards &amp; <em>impact.</em></h2>
+  <div class="ach-grid">
+    <div class="ach-card fi">
+      <div class="ach-icon">🏆</div>
+      <div><div class="ach-title">2nd Place — Secure Code Warrior Tournament</div><div class="ach-desc">Scored 6,240 / 6,800 in the Terraform Azure Security Tournament. IaC hardening and cloud vulnerability identification across Azure environments.</div></div>
+    </div>
+    <div class="ach-card fi">
+      <div class="ach-icon">🏆</div>
+      <div><div class="ach-title">Boost Award — Arcadis Gen (2023)</div><div class="ach-desc">Recognised for exceptional technical contribution and initiative within the platform engineering team.</div></div>
+    </div>
+    <div class="ach-card fi">
+      <div class="ach-icon">🏆</div>
+      <div><div class="ach-title">Appreciation Award — Datamatics Global (2018)</div><div class="ach-desc">Awarded for leading the BUPA DevSecOps pipeline transformation from on-premises TFS to Azure DevOps.</div></div>
+    </div>
+    <div class="ach-card fi">
+      <div class="ach-icon">💰</div>
+      <div><div class="ach-title">£7,200 Annual Azure Cost Savings</div><div class="ach-desc">Delivered a structured cost review — right-sizing VMs, removing orphaned resources, optimising Reserved Instance strategy across the estate.</div></div>
+    </div>
+    <div class="ach-card fi">
+      <div class="ach-icon">🔐</div>
+      <div><div class="ach-title">Zero Trust Network Implementation</div><div class="ach-desc">Replaced legacy VPN with Twingate Zero Trust across AWS EC2 and Azure, delivering a fully auditable access model.</div></div>
+    </div>
+    <div class="ach-card fi">
+      <div class="ach-icon">⚙️</div>
+      <div><div class="ach-title">SSL Certificate Automation at Scale</div><div class="ach-desc">Deployed acmebot v5 across 3 environments — automating renewal of 10+ certs on 90-day cycles, eliminating all manual management.</div></div>
     </div>
   </div>
-</section>
+</div>
+
+<div class="divider"></div>
 
 <!-- CERTIFICATIONS -->
-<section id="certifications">
-  <div class="section-label">04 — Certifications</div>
-  <h2 class="section-title fade-up">Verified credentials.</h2>
-
-  <div class="certs-grid">
-    <div class="cert-card fade-up">
-      <div class="cert-icon">☁️</div>
-      <div class="cert-name">AZ-900</div>
-      <div class="cert-org">Azure Fundamentals · Microsoft</div>
+<div class="section" id="certifications">
+  <div class="sec-eyebrow">Credentials</div>
+  <h2 class="sec-title">Verified <em>certifications.</em></h2>
+  <div class="cert-grid">
+    <div class="cert-card fi">
+      <div class="cert-icon-wrap">🎯</div>
+      <div class="cert-code">CKA</div>
+      <div class="cert-name">Certified Kubernetes Administrator · CNCF</div>
     </div>
-    <div class="cert-card fade-up">
-      <div class="cert-icon">⚙️</div>
-      <div class="cert-name">AZ-204</div>
-      <div class="cert-org">Azure Developer Associate · Microsoft</div>
+    <div class="cert-card fi">
+      <div class="cert-icon-wrap">🔄</div>
+      <div class="cert-code">AZ-400</div>
+      <div class="cert-name">DevOps Engineer Expert · Microsoft</div>
     </div>
-    <div class="cert-card fade-up">
-      <div class="cert-icon">🔄</div>
-      <div class="cert-name">AZ-400</div>
-      <div class="cert-org">DevOps Engineer Expert · Microsoft</div>
+    <div class="cert-card fi">
+      <div class="cert-icon-wrap">⚙️</div>
+      <div class="cert-code">AZ-204</div>
+      <div class="cert-name">Azure Developer Associate · Microsoft</div>
     </div>
-    <div class="cert-card fade-up">
-      <div class="cert-icon">🎯</div>
-      <div class="cert-name">CKA</div>
-      <div class="cert-org">Certified Kubernetes Administrator · CNCF</div>
-    </div>
-    <div class="cert-card fade-up" style="border-style:dashed; opacity:0.6;">
-      <div class="cert-icon">🏗️</div>
-      <div class="cert-name">AZ-305 <span style="font-size:0.7rem;color:var(--amber)"> · in progress</span></div>
-      <div class="cert-org">Azure Solutions Architect Expert · Microsoft</div>
+    <div class="cert-card fi">
+      <div class="cert-icon-wrap">☁️</div>
+      <div class="cert-code">AZ-900</div>
+      <div class="cert-name">Azure Fundamentals · Microsoft</div>
     </div>
   </div>
-</section>
+</div>
+
+<div class="divider"></div>
+
+<!-- EDUCATION & EXTRAS -->
+<div class="section" id="education">
+  <div class="sec-eyebrow">Background</div>
+  <h2 class="sec-title">Education &amp; <em>more.</em></h2>
+  <div class="extras-grid">
+    <div class="extras-card fi">
+      <div class="extras-head"><i class="fas fa-graduation-cap"></i> Education</div>
+      <p><strong>Bachelor of Science — Information Technology</strong></p>
+      <p style="margin-top:0.4rem">MSG-SGKM Universal College of Science</p>
+      <p style="margin-top:0.2rem">Mumbai, India · 2017</p>
+    </div>
+    <div class="extras-card fi">
+      <div class="extras-head"><i class="fas fa-language"></i> Languages</div>
+      <div class="tag-row">
+        <span class="etag">English · Professional</span>
+        <span class="etag">Hindi · Fluent</span>
+        <span class="etag">Marathi · Fluent</span>
+        <span class="etag">Odia · Native</span>
+      </div>
+    </div>
+    <div class="extras-card fi">
+      <div class="extras-head"><i class="fas fa-heart"></i> Interests</div>
+      <div class="tag-row">
+        <span class="etag">AI &amp; Machine Learning</span>
+        <span class="etag">Cloud Architecture</span>
+        <span class="etag">Cybersecurity</span>
+        <span class="etag">Open Source</span>
+        <span class="etag">Personal Finance</span>
+        <span class="etag">Travel &amp; Culture</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
 
 <!-- CONTACT -->
-<section id="contact">
-  <div class="section-label">05 — Contact</div>
-  <h2 class="section-title fade-up">Let's connect.</h2>
-
+<div class="section" id="contact">
+  <div class="sec-eyebrow">Get in Touch</div>
+  <h2 class="sec-title">Let's <em>connect.</em></h2>
   <div class="contact-wrap">
-    <div class="contact-text fade-up">
-      <p>I'm open to conversations about platform engineering, cloud architecture, and DevOps — whether that's a new opportunity, a technical discussion, or a collaboration. Based in London, UK, available remotely and hybrid.</p>
+    <div class="contact-body fi">
+      <p>Open to conversations about platform engineering, cloud architecture, and DevOps — new opportunities, technical collaborations, or architecture discussions.</p>
+      <p>Based in <strong>London, UK</strong>. Available remote and hybrid. Targeting senior / architect-level roles.</p>
     </div>
-    <div class="contact-links fade-up">
-      <a href="mailto:vikrampanda1996@gmail.com" class="contact-link">
+    <div class="clink-list fi">
+      <a href="mailto:vikrampanda1996@gmail.com" class="clink">
         <i class="fas fa-envelope"></i>
-        <div>
-          <strong>vikrampanda1996@gmail.com</strong>
-          <span class="contact-link-label">Email</span>
-        </div>
+        <div><strong>vikrampanda1996@gmail.com</strong><span class="clink-sub">Email</span></div>
       </a>
-      <a href="https://www.linkedin.com/in/vikram-panda-ab8a0b144/" target="_blank" class="contact-link">
+      <a href="https://www.linkedin.com/in/vikramdevops" target="_blank" class="clink">
         <i class="fab fa-linkedin"></i>
-        <div>
-          <strong>linkedin.com/in/vikram-panda</strong>
-          <span class="contact-link-label">LinkedIn</span>
-        </div>
+        <div><strong>linkedin.com/in/vikramdevops</strong><span class="clink-sub">LinkedIn</span></div>
       </a>
-      <a href="https://github.com/Vikram-96" target="_blank" class="contact-link">
+      <a href="https://github.com/Vikram-96" target="_blank" class="clink">
         <i class="fab fa-github"></i>
-        <div>
-          <strong>github.com/Vikram-96</strong>
-          <span class="contact-link-label">GitHub</span>
-        </div>
+        <div><strong>github.com/Vikram-96</strong><span class="clink-sub">GitHub</span></div>
       </a>
     </div>
   </div>
-</section>
+</div>
 
 <!-- FOOTER -->
 <footer>
-  <span>Vikram Panda</span> · Infrastructure & Platform Engineer · London, UK ·
-  Built with precision, not templates.
+  <b>Vikram Panda</b> · Infrastructure &amp; Platform Engineer · London, UK · Built with precision, not templates.
 </footer>
 
 <script>
-  // ── NETWORK PARTICLE BANNER ──
-  (function() {
-    const canvas = document.getElementById('hero-canvas');
-    const ctx = canvas.getContext('2d');
-    let W, H, particles, animId;
-
-    const COUNT = 90;
-    const CONNECT_DIST = 160;
-    const CYAN = '0,229,255';
-    const BLUE = '100,160,255';
-
-    function resize() {
-      W = canvas.width  = canvas.offsetWidth;
-      H = canvas.height = canvas.offsetHeight;
+/* ── CANVAS NETWORK ── */
+(function(){
+  const cv=document.getElementById('hero-canvas'),ctx=cv.getContext('2d');
+  let W,H,pts,aid;
+  const N=70,D=150,C1='56,189,248',C2='129,140,248';
+  function resize(){W=cv.width=cv.offsetWidth;H=cv.height=cv.offsetHeight}
+  function rnd(a,b){return Math.random()*(b-a)+a}
+  function mkP(){return{x:rnd(0,W),y:rnd(0,H),vx:rnd(-0.2,0.2),vy:rnd(-0.15,0.15),r:rnd(1,2.2),ph:rnd(0,Math.PI*2),ps:rnd(0.006,0.018),c:Math.random()>0.4?C1:C2}}
+  function init(){resize();pts=Array.from({length:N},mkP)}
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+      const a=pts[i],b=pts[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<D){ctx.beginPath();ctx.strokeStyle=`rgba(${a.c},${(1-d/D)*0.14})`;ctx.lineWidth=0.7;ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}
     }
-
-    function rand(min, max) { return Math.random() * (max - min) + min; }
-
-    function makeParticle() {
-      return {
-        x: rand(0, W), y: rand(0, H),
-        vx: rand(-0.25, 0.25), vy: rand(-0.18, 0.18),
-        r: rand(1.2, 2.8),
-        // each node pulses independently
-        pulse: rand(0, Math.PI * 2),
-        pulseSpeed: rand(0.008, 0.022),
-        // colour: most cyan, some blue
-        color: Math.random() > 0.3 ? CYAN : BLUE
-      };
+    for(const p of pts){
+      p.ph+=p.ps;
+      const g=0.5+0.5*Math.sin(p.ph),al=0.35+0.45*g,r=p.r*(0.9+0.25*g);
+      const gr=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,r*4);
+      gr.addColorStop(0,`rgba(${p.c},${al*0.5})`);gr.addColorStop(1,`rgba(${p.c},0)`);
+      ctx.beginPath();ctx.arc(p.x,p.y,r*4,0,Math.PI*2);ctx.fillStyle=gr;ctx.fill();
+      ctx.beginPath();ctx.arc(p.x,p.y,r,0,Math.PI*2);ctx.fillStyle=`rgba(${p.c},${al})`;ctx.fill();
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<-20)p.x=W+20;if(p.x>W+20)p.x=-20;if(p.y<-20)p.y=H+20;if(p.y>H+20)p.y=-20;
     }
+    aid=requestAnimationFrame(frame);
+  }
+  window.addEventListener('resize',()=>{cancelAnimationFrame(aid);init();frame()});
+  window.addEventListener('load',()=>{init();frame()});
+  if(document.readyState==='complete'){init();frame()}
+})();
 
-    function init() {
-      resize();
-      particles = Array.from({ length: COUNT }, makeParticle);
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-
-      // Draw connections
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const a = particles[i], b = particles[j];
-          const dx = a.x - b.x, dy = a.y - b.y;
-          const dist = Math.sqrt(dx*dx + dy*dy);
-          if (dist < CONNECT_DIST) {
-            const alpha = (1 - dist / CONNECT_DIST) * 0.18;
-            ctx.beginPath();
-            ctx.strokeStyle = `rgba(${a.color},${alpha})`;
-            ctx.lineWidth = 0.8;
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
-          }
-        }
-      }
-
-      // Draw nodes
-      for (const p of particles) {
-        p.pulse += p.pulseSpeed;
-        const glow = 0.5 + 0.5 * Math.sin(p.pulse);
-        const alpha = 0.4 + 0.5 * glow;
-        const r = p.r * (0.85 + 0.3 * glow);
-
-        // outer glow ring
-        const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 4);
-        grad.addColorStop(0, `rgba(${p.color},${alpha * 0.6})`);
-        grad.addColorStop(1, `rgba(${p.color},0)`);
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, r * 4, 0, Math.PI * 2);
-        ctx.fillStyle = grad;
-        ctx.fill();
-
-        // core dot
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${p.color},${alpha})`;
-        ctx.fill();
-
-        // move
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < -20) p.x = W + 20;
-        if (p.x > W + 20) p.x = -20;
-        if (p.y < -20) p.y = H + 20;
-        if (p.y > H + 20) p.y = -20;
-      }
-
-      animId = requestAnimationFrame(draw);
-    }
-
-    // Subtle mouse repel
-    let mouse = { x: -999, y: -999 };
-    document.getElementById('hero').addEventListener('mousemove', e => {
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
-    });
-
-    window.addEventListener('resize', () => {
-      cancelAnimationFrame(animId);
-      init();
-      draw();
-    });
-
-    window.addEventListener('load', () => { init(); draw(); });
-
-    if (document.readyState === 'complete') { init(); draw(); }
-  })();
-</script>
-
-<script>
-  // Intersection observer for scroll animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.fade-up, .timeline-item').forEach(el => observer.observe(el));
-
-  // Stagger timeline items
-  document.querySelectorAll('.timeline-item').forEach((el, i) => {
-    el.style.transitionDelay = `${i * 0.1}s`;
-  });
-
-  // Stagger skill groups
-  document.querySelectorAll('.skill-group').forEach((el, i) => {
-    el.style.transitionDelay = `${i * 0.07}s`;
-  });
+/* ── SCROLL REVEAL ── */
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:0.08});
+document.querySelectorAll('.fi,.xp-item').forEach((el,i)=>{el.style.transitionDelay=`${i*0.04}s`;io.observe(el)});
 </script>
 </body>
 </html>
