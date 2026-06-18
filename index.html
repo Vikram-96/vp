@@ -379,7 +379,116 @@ footer b{color:var(--sky)}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
 ::-webkit-scrollbar-thumb:hover{background:var(--sky)}
 @media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
+
+/* ─── MODAL OVERLAY ─── */
+.modal-backdrop{
+  display:none;position:fixed;inset:0;z-index:1000;
+  background:rgba(8,10,15,0.82);
+  backdrop-filter:blur(10px);
+  align-items:center;justify-content:center;
+  padding:20px;
+}
+.modal-backdrop.open{display:flex}
+
+.modal{
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:8px;
+  padding:36px 36px 32px;
+  width:100%;max-width:500px;
+  position:relative;
+  box-shadow:0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(56,189,248,0.08);
+  animation:modal-in 0.28s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes modal-in{from{opacity:0;transform:scale(0.94) translateY(12px)}to{opacity:1;transform:scale(1) translateY(0)}}
+
+.modal-close{
+  position:absolute;top:16px;right:16px;
+  background:none;border:none;color:var(--faint);
+  font-size:1.1rem;cursor:pointer;padding:4px 8px;
+  border-radius:3px;transition:color 0.2s,background 0.2s;
+}
+.modal-close:hover{color:var(--text);background:var(--raised)}
+
+.modal-eyebrow{
+  font-family:var(--mono);font-size:0.62rem;color:var(--sky);
+  letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.6rem;
+  display:flex;align-items:center;gap:0.5rem;
+}
+.modal-eyebrow::before{content:'';width:16px;height:1px;background:var(--sky)}
+
+.modal-title{
+  font-family:var(--display);font-size:1.5rem;font-weight:700;
+  letter-spacing:-0.02em;margin-bottom:1.6rem;line-height:1.1;
+}
+.modal-title em{font-style:normal;color:var(--sky)}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form-group{display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1rem}
+.form-group:last-of-type{margin-bottom:0}
+.form-group label{
+  font-family:var(--mono);font-size:0.63rem;color:var(--sub);
+  letter-spacing:0.08em;text-transform:uppercase;
+}
+.form-group input,
+.form-group select,
+.form-group textarea{
+  background:var(--raised);
+  border:1px solid var(--border2);
+  border-radius:4px;
+  padding:11px 14px;
+  font-family:var(--body);font-size:0.88rem;
+  color:var(--text);
+  outline:none;
+  transition:border-color 0.2s,box-shadow 0.2s;
+  width:100%;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  border-color:var(--sky);
+  box-shadow:0 0 0 3px rgba(56,189,248,0.10);
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder{color:var(--faint)}
+.form-group select option{background:var(--surface);color:var(--text)}
+.form-group textarea{resize:vertical;min-height:110px}
+
+.form-submit{
+  width:100%;margin-top:1.4rem;
+  background:var(--sky);color:#020810;
+  font-family:var(--display);font-size:0.88rem;font-weight:700;
+  padding:13px;border:none;border-radius:4px;
+  cursor:pointer;letter-spacing:0.02em;
+  display:flex;align-items:center;justify-content:center;gap:0.6rem;
+  transition:all 0.22s;
+}
+.form-submit:hover{background:#7DD3FC;box-shadow:0 0 24px rgba(56,189,248,0.3)}
+.form-submit:disabled{opacity:0.55;cursor:not-allowed}
+
+.form-status{
+  margin-top:1rem;padding:11px 14px;border-radius:4px;
+  font-size:0.82rem;font-family:var(--mono);
+  display:none;align-items:center;gap:0.5rem;
+  letter-spacing:0.04em;
+}
+.form-status.success{display:flex;background:rgba(52,211,153,0.10);border:1px solid rgba(52,211,153,0.25);color:var(--green)}
+.form-status.error{display:flex;background:rgba(248,113,113,0.10);border:1px solid rgba(248,113,113,0.25);color:#F87171}
+
+@media(max-width:520px){
+  .modal{padding:26px 20px 22px}
+  .form-row{grid-template-columns:1fr}
+}
+
 </style>
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    (function(){
+      // Replace 'ObUGc5_UaJmGeBqYM' with your EmailJS public key after signup
+      emailjs.init({ publicKey: 'ObUGc5_UaJmGeBqYM' });
+    })();
+  </script>
 </head>
 <body>
 
@@ -428,7 +537,7 @@ footer b{color:var(--sky)}
     </div>
     <div class="hero-actions">
       <a href="#experience" class="btn btn-sky"><i class="fas fa-terminal"></i>View Experience</a>
-      <a href="#contact" class="btn btn-ghost"><i class="fas fa-arrow-right"></i>Get in Touch</a>
+      <button class="btn btn-ghost" onclick="openModal()"><i class="fas fa-arrow-right"></i>Get in Touch</button>
     </div>
   </div>
 
@@ -766,6 +875,7 @@ footer b{color:var(--sky)}
     <div class="contact-body fi">
       <p>Open to conversations about platform engineering, cloud architecture, and DevOps — new opportunities, technical collaborations, or architecture discussions.</p>
       <p>Based in <strong>London, UK</strong>. Available remote and hybrid. Targeting senior / architect-level roles.</p>
+      <button class="btn btn-sky" onclick="openModal()" style="margin-top:1.2rem"><i class="fas fa-paper-plane"></i> Send an Enquiry</button>
     </div>
     <div class="clink-list fi">
       <a href="mailto:vikrampanda1996@gmail.com" class="clink">
@@ -826,5 +936,130 @@ footer b{color:var(--sky)}
 const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:0.08});
 document.querySelectorAll('.fi,.xp-item').forEach((el,i)=>{el.style.transitionDelay=`${i*0.04}s`;io.observe(el)});
 </script>
+
+<!-- ENQUIRY MODAL -->
+<div class="modal-backdrop" id="enquiry-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <button class="modal-close" id="modal-close" aria-label="Close"><i class="fas fa-times"></i></button>
+    <div class="modal-eyebrow">New Enquiry</div>
+    <h2 class="modal-title" id="modal-title">Let's talk <em>infrastructure.</em></h2>
+
+    <form id="enquiry-form" novalidate>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="from_name">Full Name *</label>
+          <input type="text" id="from_name" name="from_name" placeholder="Jane Smith" required>
+        </div>
+        <div class="form-group">
+          <label for="from_email">Email Address *</label>
+          <input type="email" id="from_email" name="from_email" placeholder="jane@company.com" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="company">Company / Organisation</label>
+        <input type="text" id="company" name="company" placeholder="Acme Corp (optional)">
+      </div>
+      <div class="form-group">
+        <label for="enquiry_type">Enquiry Type *</label>
+        <select id="enquiry_type" name="enquiry_type" required>
+          <option value="" disabled selected>Select a reason</option>
+          <option value="Job Opportunity">Job Opportunity</option>
+          <option value="Contract / Freelance">Contract / Freelance</option>
+          <option value="Technical Collaboration">Technical Collaboration</option>
+          <option value="Architecture Consultation">Architecture Consultation</option>
+          <option value="General Enquiry">General Enquiry</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Message *</label>
+        <textarea id="message" name="message" placeholder="Tell me about the project, role, or topic you'd like to discuss..." required></textarea>
+      </div>
+      <button type="submit" class="form-submit" id="form-submit-btn">
+        <i class="fas fa-paper-plane"></i> <span id="submit-label">Send Enquiry</span>
+      </button>
+      <div class="form-status" id="form-status"></div>
+    </form>
+  </div>
+</div>
+
+
+<script>
+/* ── MODAL ── */
+function openModal(){
+  document.getElementById('enquiry-modal').classList.add('open');
+  document.body.style.overflow='hidden';
+  setTimeout(()=>document.getElementById('from_name').focus(),100);
+}
+function closeModal(){
+  document.getElementById('enquiry-modal').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+document.getElementById('modal-close').addEventListener('click', closeModal);
+document.getElementById('enquiry-modal').addEventListener('click', function(e){
+  if(e.target===this) closeModal();
+});
+document.addEventListener('keydown', function(e){
+  if(e.key==='Escape') closeModal();
+});
+
+/* ── FORM SUBMIT via EmailJS ── */
+document.getElementById('enquiry-form').addEventListener('submit', async function(e){
+  e.preventDefault();
+
+  const btn   = document.getElementById('form-submit-btn');
+  const label = document.getElementById('submit-label');
+  const status = document.getElementById('form-status');
+
+  // Basic validation
+  const name  = document.getElementById('from_name').value.trim();
+  const email = document.getElementById('from_email').value.trim();
+  const type  = document.getElementById('enquiry_type').value;
+  const msg   = document.getElementById('message').value.trim();
+
+  if(!name || !email || !type || !msg){
+    status.className='form-status error';
+    status.innerHTML='<i class="fas fa-exclamation-circle"></i> Please fill in all required fields.';
+    return;
+  }
+  const emailRx=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if(!emailRx.test(email)){
+    status.className='form-status error';
+    status.innerHTML='<i class="fas fa-exclamation-circle"></i> Please enter a valid email address.';
+    return;
+  }
+
+  // Loading state
+  btn.disabled=true;
+  label.textContent='Sending...';
+  status.className='form-status';
+
+  const templateParams = {
+    from_name:    name,
+    from_email:   email,
+    company:      document.getElementById('company').value.trim() || 'Not provided',
+    enquiry_type: type,
+    message:      msg,
+    to_name:      'Vikram',
+  };
+
+  try {
+    // Replace 'service_ifnbl29' and 'template_akmmy6q' with your EmailJS values
+    await emailjs.send('service_ifnbl29', 'template_akmmy6q', templateParams);
+    status.className='form-status success';
+    status.innerHTML='<i class="fas fa-check-circle"></i> Sent! I'll get back to you shortly.';
+    this.reset();
+    btn.disabled=false;
+    label.textContent='Send Enquiry';
+  } catch(err){
+    console.error('EmailJS error:', err);
+    status.className='form-status error';
+    status.innerHTML='<i class="fas fa-exclamation-circle"></i> Something went wrong. Please email me directly.';
+    btn.disabled=false;
+    label.textContent='Send Enquiry';
+  }
+});
+</script>
+
 </body>
 </html>
