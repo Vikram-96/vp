@@ -984,80 +984,87 @@ document.querySelectorAll('.fi,.xp-item').forEach((el,i)=>{el.style.transitionDe
 
 
 <script>
+/* ── EMAILJS INIT ── */
+window.addEventListener('load', function() {
+  emailjs.init({ publicKey: 'ObUGc5_UaJmGeBqYM' });
+});
+
 /* ── MODAL ── */
-function openModal(){
+function openModal() {
   document.getElementById('enquiry-modal').classList.add('open');
-  document.body.style.overflow='hidden';
-  setTimeout(()=>document.getElementById('from_name').focus(),100);
+  document.body.style.overflow = 'hidden';
+  setTimeout(function(){ document.getElementById('from_name').focus(); }, 150);
 }
-function closeModal(){
+function closeModal() {
   document.getElementById('enquiry-modal').classList.remove('open');
-  document.body.style.overflow='';
+  document.body.style.overflow = '';
+  var status = document.getElementById('form-status');
+  status.className = 'form-status';
 }
 
 document.getElementById('modal-close').addEventListener('click', closeModal);
-document.getElementById('enquiry-modal').addEventListener('click', function(e){
-  if(e.target===this) closeModal();
+document.getElementById('enquiry-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
 });
-document.addEventListener('keydown', function(e){
-  if(e.key==='Escape') closeModal();
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
 });
 
-/* ── FORM SUBMIT via EmailJS ── */
-document.getElementById('enquiry-form').addEventListener('submit', async function(e){
+/* ── FORM SUBMIT ── */
+document.getElementById('enquiry-form').addEventListener('submit', function(e) {
   e.preventDefault();
 
-  const btn   = document.getElementById('form-submit-btn');
-  const label = document.getElementById('submit-label');
-  const status = document.getElementById('form-status');
+  var btn    = document.getElementById('form-submit-btn');
+  var label  = document.getElementById('submit-label');
+  var status = document.getElementById('form-status');
 
-  // Basic validation
-  const name  = document.getElementById('from_name').value.trim();
-  const email = document.getElementById('from_email').value.trim();
-  const type  = document.getElementById('enquiry_type').value;
-  const msg   = document.getElementById('message').value.trim();
+  var name  = document.getElementById('from_name').value.trim();
+  var email = document.getElementById('from_email').value.trim();
+  var type  = document.getElementById('enquiry_type').value;
+  var msg   = document.getElementById('message').value.trim();
 
-  if(!name || !email || !type || !msg){
-    status.className='form-status error';
-    status.innerHTML='<i class="fas fa-exclamation-circle"></i> Please fill in all required fields.';
+  // Validation
+  status.className = 'form-status';
+  if (!name || !email || !type || !msg) {
+    status.className = 'form-status error';
+    status.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please fill in all required fields.';
     return;
   }
-  const emailRx=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if(!emailRx.test(email)){
-    status.className='form-status error';
-    status.innerHTML='<i class="fas fa-exclamation-circle"></i> Please enter a valid email address.';
+  var emailOk = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(email);
+  if (!emailOk) {
+    status.className = 'form-status error';
+    status.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please enter a valid email address.';
     return;
   }
 
-  // Loading state
-  btn.disabled=true;
-  label.textContent='Sending...';
-  status.className='form-status';
+  // Loading
+  btn.disabled = true;
+  label.textContent = 'Sending...';
 
-  const templateParams = {
+  var params = {
     from_name:    name,
     from_email:   email,
     company:      document.getElementById('company').value.trim() || 'Not provided',
     enquiry_type: type,
     message:      msg,
-    to_name:      'Vikram',
+    to_name:      'Vikram'
   };
 
-  try {
-    // Replace 'service_ifnbl29' and 'template_akmmy6q' with your EmailJS values
-    await emailjs.send('service_ifnbl29', 'template_akmmy6q', templateParams);
-    status.className='form-status success';
-    status.innerHTML='<i class="fas fa-check-circle"></i> Sent! I'll get back to you shortly.';
-    this.reset();
-    btn.disabled=false;
-    label.textContent='Send Enquiry';
-  } catch(err){
-    console.error('EmailJS error:', err);
-    status.className='form-status error';
-    status.innerHTML='<i class="fas fa-exclamation-circle"></i> Something went wrong. Please email me directly.';
-    btn.disabled=false;
-    label.textContent='Send Enquiry';
-  }
+  emailjs.send('service_ifnbl29', 'template_akmmy6q', params)
+    .then(function() {
+      status.className = 'form-status success';
+      status.innerHTML = '<i class="fas fa-check-circle"></i> Message sent! I will get back to you shortly.';
+      document.getElementById('enquiry-form').reset();
+      btn.disabled = false;
+      label.textContent = 'Send Enquiry';
+    })
+    .catch(function(err) {
+      console.error('EmailJS error:', JSON.stringify(err));
+      status.className = 'form-status error';
+      status.innerHTML = '<i class="fas fa-exclamation-circle"></i> Failed to send. Please email vikrampanda1996@gmail.com directly.';
+      btn.disabled = false;
+      label.textContent = 'Send Enquiry';
+    });
 });
 </script>
 
